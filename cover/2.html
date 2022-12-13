@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    fieldset {
+      border-color: lightblue;
+      border-radius: 20px;
+      border-width: 5px;
+      background-color: white;
+      width: 80%;
+      margin: 0 10%;
+    }
+    legend {
+      padding: 5px 15px;
+      margin-left: 10px;
+      color: rgb(95, 133, 146);
+      font-weight: bold;
+      font-size: 25px;
+    }
+    .q1 {
+      width: 90%;
+      border-bottom: 2px dashed gray;
+      margin: 20px;
+      padding-bottom: 20px;
+    }
+    .q1 label,
+    input,
+    span {
+      margin: 10px 1px;
+    }
+  </style>
+  <body>
+    <form action="#" method="get" enctype="multipart/form-data">
+      <fieldset>
+        <legend>Form Check</legend>
+
+        <div class="q1">
+          <label>姓名:</label>
+          <input
+            type="text"
+            id="idNam"
+            size="20"
+            value="王a建民"
+            onblur="checkNam()"
+          /><!-- 瀏覽器執行到此標籤會建立一個物件-->
+          <span id="idsp"></span><br />
+          <label>(1.不可空白2.至少兩個字以上3.必須全部為中文字)</label><br />
+        </div>
+
+        <div class="q1">
+          <label>密碼:</label>
+          <input
+            type="text"
+            id="idPwd"
+            size="20"
+            value="123456"
+            onblur="checkPwd()"
+          /><!-- 瀏覽器執行到此標籤會建立一個物件-->
+          <span id="idsp1"></span><br />
+          <label
+            >(1.不可空白2.至少6個字且必須包含英數字、特殊字元[!@#$%^&*])</label
+          ><br />
+        </div>
+
+        <div class="q1">
+          <label>日期:</label>
+          <input
+            type="text"
+            id="idDate"
+            size="20"
+            value="2021/2/29"
+            onblur="checkDat()"
+          /><!-- 瀏覽器執行到此標籤會建立一個物件-->
+          <span id="idsp2"></span><br />
+          <label>格式:西元年/月/日(yyyy/mm/dd)</label><br />
+        </div>
+      </fieldset>
+    </form>
+  </body>
+
+  <script>
+
+    function checkNam(){
+           //取得idPwd元素
+        let theNamobj = document.getElementById("idNam");
+        console.log(theNamobj);
+           //取得idPwd元素值
+        let theNamobjVal = theNamobj.value;
+        console.log(theNamobjVal);
+
+           //1.不可空白2.至少兩個字以上3.必須全部為中文字
+           let sp0 = document.getElementById("idsp");
+        let theNamLen = theNamobjVal.length;
+        let re = /^[\u4E00-\u9FA5]+$/;
+        let n1 = false, n2 = false;
+        if (theNamobjVal == "") {
+            n3 = true;
+            }
+        if (theNamLen >= 2)
+            n1 = true;
+        n2 = re.test(theNamobjVal);
+        if (n1 == true && n2 == true ) {
+            sp0.innerHTML = `<img src="img/correct.png" />輸入正確`;
+        } else if (n1 == false && n2 == false&&n3==true) {
+            sp0.innerHTML = `<img src="img/error.png" />1.至少兩個字以上<br> 2.必須全部為中文字<br>3.不可為空白`;
+        } else if (n1 == false) {
+            sp0.innerHTML = `<img src="img/error.png" />至少兩個字以上`;
+        } else if (n2 == false) {
+            sp0.innerHTML = `<img src="img/error.png" />必須全部為中文字`;
+        }
+       
+        
+
+       }
+
+    function checkPwd(){
+           //取得idPwd元素
+           let thePwdobj = document.getElementById("idPwd");
+           console.log(thePwdobj);
+           //取得idPwd元素值
+           let thePwdobjVal = thePwdobj.value;
+           console.log(thePwdobjVal);
+
+           //判斷元素值是否為空白，密碼長度是否大於6
+           //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+           let sp = document.getElementById("idsp1");
+           let thePwdLen = thePwdobjVal.length;
+           let flag1 = false, flag2 = false,flag3=false;
+            let special = "!@#$%^&*";
+           if (thePwdobjVal == "") {
+               sp.innerHTML = `<img src="img/error.png"/>密碼不可為空白`;
+           }
+
+           else if (thePwdLen >= 6) {
+               //sp.innerHTML = ">=6";
+               for (let i = 0; i < thePwdLen; i++) {
+                   ch = thePwdobjVal.charAt(i).toUpperCase();
+                   if (ch >= "A" && ch <= "Z") {
+                       flag1 = true;
+                   }
+                    if (ch >= "0" && ch <= "9") {
+                       flag2 = true;
+                   }
+                   for (let j = 0; j < special.length; j++) {
+                       specialchar = special.charAt(j);
+                       console.log(specialchar);
+                       if (ch == specialchar) {
+                           flag3 = true;
+                       }
+                   }
+               }
+               if (flag1==true && flag2==true&&flag3==true) {
+                   sp.innerHTML = `<img src="img/correct.png"/>符合密碼格式`;
+               }
+               else {
+                   sp.innerHTML = `<img src="img/error.png"/>不符合密碼格式`;
+               }
+
+           }
+           else {
+               sp.innerHTML = `<img src="img/error.png"/>密碼要大於6位`;
+           }
+
+       }
+
+      function checkDat() {
+
+           let theDateobj = document.getElementById("idDate");
+          let dateStr = theDateobj.value;
+           let sp2 = document.getElementById("idsp2");
+          
+
+           let dateObj = dateStr.split('/'); // yyyy/mm/dd
+           //列出12個月，每月最大日期限制
+           let limitInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+           let theYear = parseInt(dateObj[0]);
+           let theMonth = parseInt(dateObj[1]);
+           let theDay = parseInt(dateObj[2]);
+           let isLeap = new Date(theYear, 1, 29).getDate() === 29; // 是否為閏年?
+           let formatdate = 0, check = true;
+          for (let i = 0; i < dateObj.length; i++) {
+              if (i == 0) {
+                  if (dateObj[i].length == 4) {
+                      formatdate += 1;
+                  }
+              }
+              else if (dateObj[i].length == 2) {
+                  formatdate += 1;
+              }
+          }
+           if (isLeap) {
+               // 若為閏年，最大日期限制改為 29
+               limitInMonth[1] = 29;
+           }
+          if (theMonth > 12) {
+              sp2.innerHTML = `<img src="img/error.png"/>沒有這個日期`;
+              check = false;
+          }
+           // 比對該日是否超過每個月份最大日期限制
+          if (theDay <= limitInMonth[theMonth - 1]) {
+              sp2.innerHTML = `<img src="img/error.png"/>沒有這個日期`;
+              check = false;
+          }
+          if (check == true && formatdate == 3) {
+              sp2.innerHTML = `<img src="img/correct.png"/>輸入正確`;
+          }
+          else if (formatdate != 3) {
+              sp2.innerHTML = `<img src="img/error.png"/>輸入格式錯誤`;
+          }
+       }
+          
+
+       
+    
+  </script>
+</html>

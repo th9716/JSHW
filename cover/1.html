@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@900&family=Roboto:ital,wght@1,900&display=swap" rel="stylesheet">
+</head>
+<style>
+    div{
+        /*display:flex;
+        justify-content:center;*/
+        position:absolute;
+        top:50%;
+        left:50%;
+        margin:-362.5px 0px 0px -346.5px; 
+        
+    }
+    caption {
+        font-family: 'Noto Sans TC', sans-serif;
+        font-size:50px;
+        padding:20px 0;
+    }
+    table {
+        border: 5px dotted rgb(222, 126, 126);
+        border-collapse: collapse;
+        color: rgb(136, 70, 80);
+    }
+    td {
+        padding: 20px 10px;
+        width: 55px;
+        border: 5px dotted rgb(222, 126, 126);
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
+    }
+    tr:nth-child(2n+1) {
+        background-color: rgb(255, 194, 203);
+    }
+    tr:nth-child(2n) {
+        background-color: rgb(255, 237, 243);
+    }
+</style>
+
+<body>
+
+</body>
+<script>
+    document.write("<div>")
+    document.write("<table>")
+    document.write("<caption> 九九乘法表 </caption>");
+    var i = 1
+    var k
+    while (i <= 9) {
+        document.write("<tr>")
+        var j = 1;
+        while (j <= 9) {
+            k = i * j;
+            document.write("<td>" + j + "x" + i + "=" + k + "</td>");
+            j++;
+        }
+        document.write("</tr>")
+        i++;
+    }
+    document.write("</table>")
+    document.write("</div>")
+
+</script>
+</html>
