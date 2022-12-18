@@ -1,0 +1,196 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        * {
+            box-sizing: border-box
+        }
+        .outer{
+            margin-top: 150px;
+        }
+
+        .slideshow-container {
+            max-width: 1000px;
+            position: relative;
+            margin: auto;
+        }
+
+        .mySlides {
+            display: none;
+        }
+
+        .prev,
+        .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            margin-top: -22px;
+            padding: 16px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+        }
+
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+            .prev:hover,
+            .next:hover {
+                background-color: rgba(0, 0, 0, 0.8);
+            }
+
+        .text {
+            color: #fff;
+            font-size: 15px;
+            padding: 8px 12px;
+            position: absolute;
+            bottom: 8px;
+            width: 100%;
+            text-align: center;
+            background-color:;
+        }
+
+        .numbertext {
+            color: #f2f2f2;
+            font-size: 12px;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        .dot {
+            cursor: pointer;
+            height: 15px;
+            width: 15px;
+            margin: 0 2px;
+            background-color: #bbb;
+            border-radius: 50%;
+            display: inline-block;
+            transition: background-color 0.6s ease;
+        }
+
+            .active,
+            .dot:hover {
+                background-color: #717171;
+            }
+
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @-webkit-keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+
+            to {
+                opacity: 1
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="outer">
+        <div class="slideshow-container">
+    
+            <div class="mySlides fade">
+                <div class="numbertext"></div>
+                <img src="shibaimg/1.jpg" style="width:100%">
+            </div>
+    
+            <div class="mySlides fade">
+                <div class="numbertext"></div>
+                <img src="shibaimg/2.jpg" style="width:100%">
+            </div>
+    
+            <div class="mySlides fade">
+                <div class="numbertext"></div>
+                <img src="shibaimg/3.jpg" style="width:100%">
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext"></div>
+                <img src="shibaimg/4.jpg" style="width:100%">
+            </div>
+    
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        </div>
+        <div style="text-align:center">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
+
+    </div>
+
+
+
+    <script>
+        //紀錄顯示的位置
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        //左右移動，往左就是-1給slideIndex，往右+1給slideIndex
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        //slideIndex直接等於點點給的位置
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            //設定接下來會用到變數，i迴圈用的，slides抓每一個圖片的區塊，dots每一個點點
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            //設定只要超過輪播圖片的數量，就回到最初或是最後，第一個if 設定只要現在超過輪播圖片最後一張，設定回到第一張，第二個if 小於第一張就會回到最後一張
+            if (n > slides.length) { slideIndex = 1 }
+            if (n < 1) { slideIndex = slides.length }
+            //第一個for將所有的圖片區塊都消失不見，將他們CSS中的display取消，第二個for將所有點點CSS中的active取代成””，而這個CSS呢，變成深色
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            //把需要出現的圖片顯示出來，以及現在停留在哪一張圖的點點變成重點深色
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " active";
+        }
+        //設定每5秒輪播一次
+        var timer = undefined;
+
+        function setTimer() {
+            timer = setInterval(function () {
+                plusSlides(1);
+            }, 5000);
+        }
+        setTimer();
+    </script>
+</body>
+</html>

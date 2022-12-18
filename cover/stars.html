@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>stars.html</title>
+    <style>
+        .outer{
+            position:absolute;
+            top: 40%;
+            left: 50%;
+            margin: -62px 0px 0px -313px;
+        }
+        .s {
+            filter: grayscale(1); /*沒有任何色彩的黑白影像*/
+            width: 120px;
+        }
+        .n {
+            filter: grayscale(0); /*顏色不變*/
+            width: 120px;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="outer">
+        <img id="1" class="s" src="img/star.png" />
+        <img id="2" class="s" src="img/star.png" />
+        <img id="3" class="s" src="img/star.png" />
+        <img id="4" class="s" src="img/star.png" />
+        <img id="5" class="s" src="img/star.png" />
+
+    </div>
+    <script>
+        let stars = document.getElementsByTagName("img");
+        let c = false;
+        for (let j = 1; j <= stars.length; j++) {
+            document.getElementById(j).addEventListener("mouseover", mouseOver);
+            document.getElementById(j).addEventListener("mouseout", mouseOut);
+            document.getElementById(j).addEventListener("click", click);
+            document.getElementById(j).addEventListener("dblclick", dbclick);
+        }
+        function mouseOver() {
+            if (c != true) {
+                for (let i = 1; i <= event.target.id; i++) {
+                    document.getElementById(i).className = "n";
+                }
+            }
+        }
+        function mouseOut() {
+            if (c !=true) {
+            for (let y = 1; y <= event.target.id; y++) {
+                document.getElementById(y).className = "n";
+            }
+            for (let x = event.target.id; x <= stars.length; x++) {
+                document.getElementById(x).className = "s";
+            }
+            }
+        }
+        function dbclick() {
+            for (let x = 1; x <= stars.length; x++) {
+                document.getElementById(x).className = "s";
+            }
+            c = false;
+        }
+        function click() {
+            for (let z = 1; z <= event.target.id; z++) {
+                document.getElementById(z).className = "n";
+            }
+            c = true;
+        }
+    </script>
+</body>
+</html>
